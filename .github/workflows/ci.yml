@@ -1,0 +1,19 @@
+name: CICD
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  on_build_actions: # джоба айди
+    runs-on: ubuntu-latest # ранер может  быть любым
+    steps: # шаги 
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: cd $GITHUB_WORKSPACE
+
+      - name: Run Tests
+        run: python -m unittest discover -v . "*_test.py"
